@@ -1,3 +1,17 @@
-const express = require ('express');
+require('dotenv').config()  // configuracion varibles de entorno
+const app = require ('./app');
+const { db } = require ('./database/config');
+//db cong
+db.authenticate()
+.then(() => console.log('Database authenticated ...👽'))
+.catch ((err) => console.log(err));
 
-const app = express();
+db.sync()
+.then(() => console.log('Database Synced ...🤞🏻'))
+.catch((err) => console.log(err));
+
+
+const PORT = process.env.PORT;
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}...🦾👾`)
+});
