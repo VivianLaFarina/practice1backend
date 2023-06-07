@@ -1,7 +1,20 @@
 const express = require('express');
-const router = express.Router();
+const userController = require('./../controllers/user.controller')
 
+
+const router = express.Router();
 // TODO: Definir End points
+
+router
+.route('')
+.get(userController.findAllUsers)
+.post(userController.createUser);
+
+router 
+ .route('/:id')
+ .get( userController.findUser)
+ .patch(userController.update)
+ .delete(userController.delete);
 
 
 module.exports = router;
