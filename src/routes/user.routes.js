@@ -1,7 +1,11 @@
 const express = require('express');
-const app = require('../app');
-
+const userController = require('./../controllers')
 
 const router = express.Router();
 
-module.exports = app
+
+// TODO: Definir End points
+router.route('').get().post();
+
+
+module.exports = router;
