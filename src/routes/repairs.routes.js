@@ -1,20 +1,18 @@
 const express = require('express');
-const userController = require('./../controllers/user.controller')
-
+const repairController = require('./../controllers/repairs.controller');
 
 const router = express.Router();
 // TODO: Definir End points
 
 router
-.route('')
-.get(userController.findAllUsers)
-.post(userController.createUser);
+  .route('/')
+  .get(repairController.findAllRepair)
+  .post(repairController.createRepair);
 
-router 
- .route('/:id')
- .get( userController.findUser)
- .patch(userController.update)
- .delete(userController.delete);
-
+router
+  .route('/:id')
+  .get(repairController.findAllRepair)
+  .patch(repairController.update)
+  .delete(repairController.delete);
 
 module.exports = router;
