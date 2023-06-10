@@ -6,12 +6,12 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(repairController.findAllRepair)
+  .get(repairController.findAllRepairs)
   .post(repairController.createRepair);
 
 router
   .route('/:id')
-  .get(repairController.findAllRepair)
+  .get(repairController.findRepair)
   .patch(repairController.update)
   .delete(repairController.delete);
 

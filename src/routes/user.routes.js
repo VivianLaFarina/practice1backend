@@ -5,8 +5,8 @@ const router = express.Router();
 
 // TODO: Definir End points
 router
-  .route('')
-  .get(userController.findAllUsers)
+  .route('/')
+  .get(userController.findAllUser)
   .post(userController.createUser);
 
 router

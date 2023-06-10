@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 
-exports.findAllUsers = (req, res) => {
+exports.findAllUser = (req, res) => {
   try {
     // aqui va la logica
 

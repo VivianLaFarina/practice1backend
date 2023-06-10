@@ -1,4 +1,4 @@
-(exports.findAllRepair = (req, res) => {
+(exports.findAllRepairs = (req, res) => {
   try {
   } catch (error) {
     console.log(error);
@@ -18,7 +18,7 @@
       });
     }
   }),
-  (exports.findRapair = (req, res) => {
+  (exports.findRepair = (req, res) => {
     try {
     } catch (error) {
       console.log(error);
