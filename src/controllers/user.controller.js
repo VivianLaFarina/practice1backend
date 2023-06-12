@@ -35,10 +35,27 @@ exports.createUser = async (req, res) => {
   }
 };
 
-exports.findUser = (req, res) => {
+exports.findUser = async (req, res) => {
   try {
-    res.status(200).json({
+    const { id } = req.params;
+
+    const user = await User.findOne({
+      where: {
+        id,
+        status: 'available',
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: 'error',
+        message: `User with Id ${id} not found`,
+      });
+    }
+
+    return res.status(200).json({
       status: 'success',
+      user,
     });
   } catch (error) {
     console.log(error);
@@ -49,9 +66,24 @@ exports.findUser = (req, res) => {
   }
 };
 
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   try {
-    res.status(200).json({
+    const { id } = req;
+    const { name, email } = req.body;
+    const user = await User.findOne({
+      where: {
+        id,
+        status: 'available',
+      },
+    });
+    if (!user) {
+      return res.status(404).json({
+        status: 'error',
+        message: `User with Id ${id} not found`,
+      });
+    }
+
+    return res.status(200).json({
       status: 'success',
     });
   } catch (error) {
@@ -65,7 +97,7 @@ exports.update = (req, res) => {
 
 exports.delete = (req, res) => {
   try {
-    res.status(200).json({
+    return res.status(200).json({
       status: 'success',
     });
   } catch (error) {
