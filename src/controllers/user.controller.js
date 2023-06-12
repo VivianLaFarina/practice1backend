@@ -1,11 +1,18 @@
 const User = require('../models/user.model');
 
-exports.findAllUser = (req, res) => {
+exports.findAllUser = async (req, res) => {
   try {
-    // aqui va la logica
+    // Aquí va la lógica para buscar y devolver todos los usuarios
+
+    const users = await User.findAll({
+      where: {
+        status: 'available',
+      },
+    });
 
     return res.status(200).json({
       status: 'success',
+      users,
     });
   } catch (error) {
     console.log(error);
@@ -38,7 +45,6 @@ exports.createUser = async (req, res) => {
 exports.findUser = async (req, res) => {
   try {
     const { id } = req.params;
-
     const user = await User.findOne({
       where: {
         id,
@@ -68,23 +74,27 @@ exports.findUser = async (req, res) => {
 
 exports.update = async (req, res) => {
   try {
-    const { id } = req;
+    const { id } = req.params;
     const { name, email } = req.body;
+
     const user = await User.findOne({
       where: {
         id,
         status: 'available',
       },
     });
+
     if (!user) {
       return res.status(404).json({
         status: 'error',
-        message: `User with Id ${id} not found`,
+        message: `User with Id ${id} not found 🕵🏻‍♀️`,
       });
     }
+    await user.update({ name, email });
 
     return res.status(200).json({
       status: 'success',
+      message: 'User updated 🪄',
     });
   } catch (error) {
     console.log(error);
@@ -95,10 +105,29 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
   try {
+    const { id } = req.params;
+
+    const user = await User.findOne({
+      where: {
+        id,
+        status: 'available',
+      },
+    });
+
+    if (!user) {
+      return res.status(404).json({
+        status: 'error',
+        message: `User with Id ${id} not found 🕵🏻‍♀️`,
+      });
+    }
+
+    await user.destroy();
+
     return res.status(200).json({
       status: 'success',
+      message: 'User deleted 🗑️',
     });
   } catch (error) {
     console.log(error);
