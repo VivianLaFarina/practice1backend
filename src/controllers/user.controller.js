@@ -1,6 +1,6 @@
 const User = require('../models/user.model');
 
-exports.findAllUser = async (req, res) => {
+exports.findAllUsers = async (req, res) => {
   try {
     // Aquí va la lógica para buscar y devolver todos los usuarios
 
