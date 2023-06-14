@@ -85,14 +85,14 @@ exports.update = async (req, res) => {
     if (!repair) {
       return res.status(400).json({
         status: 'error',
-        message: "You can't update a non-existing or completed repair",
+        message: `Repair with id: ${id} Not Found`,
       });
     }
   } catch (error) {
     console.log(error);
     return res.status(500).json({
       status: 'fail',
-      message: 'Something went very wrong! 📢',
+      message: `You can't update a non-existing or completed repair ! 📢 🕵🏻‍♀️`,
     });
   }
 };
