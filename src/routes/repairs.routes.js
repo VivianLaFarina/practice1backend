@@ -6,7 +6,7 @@ const router = express.Router();
 
 router
   .route('/')
-  .get(repairController.findAllRepairs)
+  .get(repairController.findAllRepair)
   .post(repairController.createRepair);
 
 router
