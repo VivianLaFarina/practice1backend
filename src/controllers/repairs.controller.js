@@ -88,6 +88,13 @@ exports.update = async (req, res) => {
         message: `Repair with id: ${id} Not Found`,
       });
     }
+
+    await repair.update({ status });
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Repair updated 🪄',
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({
@@ -97,8 +104,30 @@ exports.update = async (req, res) => {
   }
 };
 
-exports.delete = (req, res) => {
+exports.delete = async (req, res) => {
   try {
+    const { id } = req.params;
+
+    const repair = await Repair.findOne({
+      where: {
+        id,
+        status: 'pending',
+      },
+    });
+
+    if (!repair) {
+      return res.status(404).json({
+        status: 'error',
+        message: `Repair with Id ${id} not found 🕵🏻‍♀️`,
+      });
+    }
+
+    await repair.destroy();
+
+    return res.status(200).json({
+      status: 'success',
+      message: 'Repair deleted 🗑️',
+    });
   } catch (error) {
     console.log(error);
     return res.status(500).json({

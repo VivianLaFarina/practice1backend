@@ -75,26 +75,26 @@ exports.findUser = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const { id } = req.params;
-    const { name, email } = req.body;
+    const { status } = req.body;
 
-    const user = await User.findOne({
+    const repair = await Repair.findOne({
       where: {
         id,
-        status: 'available',
+        status: 'pending',
       },
     });
 
-    if (!user) {
+    if (!repair) {
       return res.status(404).json({
         status: 'error',
         message: `User with Id ${id} not found 🕵🏻‍♀️`,
       });
     }
-    await user.update({ name, email });
+    await repair.update({ status });
 
     return res.status(200).json({
       status: 'success',
-      message: 'User updated 🪄',
+      message: ' User updated 🪄',
     });
   } catch (error) {
     console.log(error);
